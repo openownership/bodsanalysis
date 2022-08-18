@@ -16,9 +16,9 @@ Clone the repository, open the notebook in a suitable program (e.g. [VS code](ht
 
 ## Running on Deepnote/Google Colab
 
-To run on [Deepnote](https://deepnote.com/), create a new project and upload the notebook, alongside `qbods.py` and `requirements.txt` as files. Then open the notebook and follow setup instructions.
+To run on [Deepnote](https://deepnote.com/), clone this repository, then create a new project and upload the notebook, alongside `qbods.py` and `requirements.txt` as files. Then open the notebook and follow setup instructions.
 
-To run on [Google Colab](https://colab.research.google.com/), click File > Open notebook, then click the Github tab and enter the url of this repository in the space provided. Then open the notebook and follow setup instructions.
+To run on [Google Colab](https://colab.research.google.com/), clone this repository then click File > Upload notebook, and upload the notebook. Then in the left hand menu, click on icons for 'Files' then 'Upload Files', then upload the files `qbods.py` and `requirements.txt`. Then open the notebook and follow setup instructions.
 
 ## Contributing
 
