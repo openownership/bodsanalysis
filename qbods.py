@@ -1001,7 +1001,7 @@ def q322(entityAddresses):
     Returns: A list contaning a dataframe of counts
     """
 
-    out = entityIdentifiers['scheme'].fillna(
+    out = entityAddresses['address'].fillna(
         'Missing').value_counts().to_frame()
     out = sortCounts(out)[0:10]
     return(out)
