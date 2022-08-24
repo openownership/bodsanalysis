@@ -991,6 +991,20 @@ def q321(entityIdentifiers):
 
     return ([out, fig])
 
+def q322(entityAddresses):
+    """
+    Description: Provides a breakdown of entity addresses
+
+    Arguments:
+        entityAddresses: a pandas dataframe containing entity addresses
+
+    Returns: A list contaning a dataframe of counts
+    """
+
+    out = entityIdentifiers['scheme'].fillna(
+        'Missing').value_counts().to_frame()
+    out = sortCounts(out)[0:10]
+    return(out)
 
 def q331(ownershipOrControlStatement, samplesize=100):
     """
