@@ -196,7 +196,7 @@ def q121(ownershipOrControlInterest, ownershipOrControlStatement, personStatemen
     Description: Provides a breakdown of interested parties in ownership or control statements according to whether at least one beneficial ownership or control interest is declared
 
     Arguments:
-        ownershipOrControlInteres: a pandas dataframe containing ownership or control interests           
+        ownershipOrControlInterest: a pandas dataframe containing ownership or control interests           
         ownershipOrControlStatement: a pandas dataframe containing ownership or control statements
         personStatement: a pandas dataframe containing person statements
         entityStatement: a pandas dataframe containing entity statements
