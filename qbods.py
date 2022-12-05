@@ -1016,15 +1016,22 @@ def q331(ownershipOrControlStatement, samplesize=100):
 
     Returns: A list contaning a dataframe of ownership chain summaries, and a network diagram of ownership chains
     """
-    subjectList = ownershipOrControlStatement['subject_describedByEntityStatement'].tolist(
-    )
-    ipPersonList = ownershipOrControlStatement['interestedParty_describedByPersonStatement'].tolist(
-    )
-    ipEntityList = ownershipOrControlStatement['interestedParty_describedByEntityStatement'].tolist(
-    )
 
-    subject = subjectList*2
-    interestedParty = ipPersonList+ipEntityList
+    if 'nterestedParty_describedByEntityStatement' in ownershipOrControlStatement:
+        subjectList = ownershipOrControlStatement['subject_describedByEntityStatement'].tolist(
+        )
+        ipPersonList = ownershipOrControlStatement['interestedParty_describedByPersonStatement'].tolist(
+        )
+        ipEntityList = ownershipOrControlStatement['interestedParty_describedByEntityStatement'].tolist(
+        )
+        subject = subjectList*2
+        interestedParty = ipPersonList+ipEntityList
+    else:
+        subject = ownershipOrControlStatement['subject_describedByEntityStatement'].tolist(
+        )
+        interestedParty = ownershipOrControlStatement['interestedParty_describedByPersonStatement'].tolist(
+        )
+
 
     el = pd.DataFrame(
         {'subject': subject, 'interestedParty': interestedParty}).dropna()
