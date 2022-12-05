@@ -922,6 +922,7 @@ def q314(personStatement):
     """
 
     out = personStatement.copy(deep=True)['birthDate'].to_frame()
+    out['birthDate'] = pd.to_datetime(out['birthDate'],errors='coerce')
     out['birthYear'] = pd.DatetimeIndex(out['birthDate']).year/10
     out['birthDecadeStart'] = out['birthYear'].apply(np.floor)*10+1
     out['birthDecadeEnd'] = out['birthDecadeStart']+9
