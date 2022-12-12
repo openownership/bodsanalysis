@@ -40,7 +40,7 @@ def readBodsData(folder):
     files = os.listdir(folder)
     output = {}
     for file in files:
-        output[file[:-4]] = pd.read_csv('csv/'+file)
+        output[file[:-4]] = pd.read_csv(folder+'/'+file)
     return (output)
 
 
