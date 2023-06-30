@@ -1034,7 +1034,7 @@ def q331(ownershipOrControlStatement, samplesize=100):
 
     # replaces empty strings with NaNs, then drops all rows with a NaN value
 
-    el['interestedParty'].replace('', pd.np.nan, inplace=True)
+    el['interestedParty'].replace('', np.nan, inplace=True)
 
     el.dropna(subset=['interestedParty'], inplace=True)
 
