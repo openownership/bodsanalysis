@@ -1030,7 +1030,15 @@ def q331(ownershipOrControlStatement, samplesize=100):
     interestedParty = ipPersonList+ipEntityList
 
     el = pd.DataFrame(
-        {'subject': subject, 'interestedParty': interestedParty}).dropna()
+        {'subject': subject, 'interestedParty': interestedParty})
+
+    # replaces empty strings with NaNs, then drops all rows with a NaN value
+
+    el['interestedParty'].replace('', np.nan, inplace=True)
+
+    el.dropna(subset=['interestedParty'], inplace=True)
+
+    # creates the graph, G
 
     G = nx.from_pandas_edgelist(el, 'subject', 'interestedParty')
     components = list(nx.connected_components(G))
