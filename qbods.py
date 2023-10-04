@@ -1558,7 +1558,7 @@ def q822(entityStatement):
 
     Arguments: entityStatement: a pandas dataframe containing entity statements (required columns - foundingDate, name, dissolutionDate)
 
-    Returns: Number of companies, grouped by year of founding. 
+    Returns: Dataframe of number of companies, grouped by year of founding. Barchart showing these counts. 
     '''
     
     entSD = entityStatement.copy(deep=True)
