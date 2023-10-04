@@ -1551,6 +1551,39 @@ def q821(entityStatement):
 
     return ([out, fig])
 
+def q822(entityStatement):
+
+    '''
+    Description: Provides a breakdown of number of companies dissolved within a year of founding. 
+
+    Arguments: entityStatement: a pandas dataframe containing entity statements (required columns - foundingDate, name, dissolutionDate)
+
+    Returns: Number of companies, grouped by year of founding. 
+    '''
+    
+    entSD = entityStatement.copy(deep=True)
+
+    entSD = entSD.dropna(subset=['dissolutionDate'])
+    entSD['name'] = entSD['name'].str.lower()
+    entSD = entSD.drop_duplicates(subset=['foundingDate','dissolutionDate','name'])
+
+    entSD['foundingDate'] = pd.to_datetime(entSD['foundingDate'],format='%Y/%m/%d')
+    entSD['dissolutionDate'] = pd.to_datetime(entSD['dissolutionDate'],format='%Y/%m/%d')
+    entSD['yearsOperating'] = (entSD['dissolutionDate']-entSD['foundingDate'])/np.timedelta64(1, 'Y')
+
+    entSD = entSD[entSD['yearsOperating']<1]
+    entSD['yearFounded'] = entSD['foundingDate'].dt.to_period('Y')
+    entSD = entSD.groupby(by=['yearFounded'],as_index=False).size()
+
+    out = entSD
+
+    ax = out.plot.barh(stacked=True,legend=False)
+    ax.set(xlabel='Companies dissolved within 1 year of founding', ylabel='Year founded')
+    fig = ax.get_figure()
+    plt.close()
+
+    return ([out,fig])
+
 
 def q831(entityStatement, personStatement, ownershipOrControlStatement):
     """
