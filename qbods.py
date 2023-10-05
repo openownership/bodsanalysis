@@ -1567,8 +1567,8 @@ def q822(entityStatement):
     entSD['name'] = entSD['name'].str.lower()
     entSD = entSD.drop_duplicates(subset=['foundingDate','dissolutionDate','name'])
 
-    entSD['foundingDate'] = pd.to_datetime(entSD['foundingDate'],format='%Y/%m/%d')
-    entSD['dissolutionDate'] = pd.to_datetime(entSD['dissolutionDate'],format='%Y/%m/%d')
+    entSD['foundingDate'] = pd.to_datetime(entSD['foundingDate'],format='%Y-%m-%d')
+    entSD['dissolutionDate'] = pd.to_datetime(entSD['dissolutionDate'],format='%Y-%m-%d')
     entSD['yearsOperating'] = (entSD['dissolutionDate']-entSD['foundingDate'])/np.timedelta64(1, 'Y')
 
     entSD = entSD[entSD['yearsOperating']<1]
