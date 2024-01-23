@@ -1551,6 +1551,58 @@ def q821(entityStatement):
 
     return ([out, fig])
 
+def q822(entityStatement):
+
+    '''
+    Description: Provides a breakdown of number of companies dissolved within a year of founding. 
+
+    Arguments: entityStatement: a pandas dataframe containing entity statements (required columns - foundingDate, name, dissolutionDate)
+
+    Returns: Number of companies, grouped by year of founding. 
+    '''
+    #create deep copy to avoid chaining issues 
+    entSD = entityStatement.copy(deep=True)
+
+    #drop rows with null founding date
+    entSD = entSD.dropna(subset=['foundingDate'])
+
+    if entSD.empty:
+        return(['There are no founding dates in this dataset'])
+
+    #drop rows with null dissolution date
+    entSD = entSD.dropna(subset=['dissolutionDate'])
+
+    if entSD.empty:
+        return(['There are no dissolution dates in this dataset'])
+
+    #remove duplicates
+    entSD['name'] = entSD['name'].str.lower()
+    entSD = entSD.drop_duplicates(subset=['foundingDate','dissolutionDate','name'])
+
+    #calculate years between founding and dissolution
+    entSD['foundingDate'] = pd.to_datetime(entSD['foundingDate'],format='%Y-%m-%d')
+    entSD['dissolutionDate'] = pd.to_datetime(entSD['dissolutionDate'],format='%Y-%m-%d')
+    entSD['yearsOperating'] = (entSD['dissolutionDate']-entSD['foundingDate'])/np.timedelta64(1, 'Y')
+
+    #filter to companies operating for less than one year 
+    entSD = entSD[entSD['yearsOperating']<1]
+
+    if entSD.empty:
+        return(['There are no companies in the dataset that dissolved within a year of founding'])
+
+    #group by year founded
+    entSD['yearFounded'] = entSD['foundingDate'].dt.to_period('Y')
+    entSD = entSD.groupby(by=['yearFounded'],as_index=False).size()
+
+    #generate outputs
+    out = entSD
+    ax = out.plot.barh(stacked=True,legend=False)
+    ax.set(xlabel='Companies dissolved within 1 year of founding', ylabel='Year founded')
+    fig = ax.get_figure()
+    plt.close()
+
+    return ([out,fig])
+
 
 def q831(entityStatement, personStatement, ownershipOrControlStatement):
     """
