@@ -4,11 +4,13 @@ This repository contains notebooks and code for analysing data published to the 
 
 The main components are:
 
-- A Python module `qbods.py`, which contains a set of functions for reading, summarising and analysing BODS data. This code is under development and will likely contain bugs.
+- A Python module `qbods.py`, which contains a set of functions for reading, summarising and analysing BODS 0.2 data. This code is under development and will likely contain bugs.
 
 - An iPython notebook `latvia_demo.ipynb`, which contains code to run a subset of the functions on an [initial dataset](https://data.gov.lv/dati/lv/dataset/plg-bods/resource/19a7d5f5-5586-4de2-a710-fc7145a129f2) released by the Register of Enterprises of the Republic of Latvia, with accompanying text.
 
-Additional notebooks will be added to the repository as this work progresses.
+- An iPython notebook `Insights_UK_PSC_BODS-02.ipynb` which contains code to explore ownership structures in the UK’s People with Significant Control (PSC) register. It supports the analysis presented in the research report 'Insights from the UK PSC Register' and includes functions to process UK PSC data in BODS 0.2 format, identify patterns, and flag anomalies.
+
+Additional notebooks may be added to the repository in future.
 
 ## Running locally
 
