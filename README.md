@@ -1,6 +1,8 @@
 # BODS analysis notebooks
 
-This repository contains notebooks and code for analysing data published to the [Beneficial Ownership Data Standard](https://standard.openownership.org/) (BODS). The work contained here has been produced as part of the [Opening Extractives programme](https://www.openownership.org/en/topics/opening-extractives/) which is implemented jointly between the [Extractive Industries Transparency Initiative International Secretariat](https://eiti.org/opening-extractives) and Open Ownership.
+This repository contains notebooks and code for analysing data published to the [Beneficial Ownership Data Standard](https://standard.openownership.org/) (BODS). 
+
+Initial work here was produced as part of the [Opening Extractives programme](https://www.openownership.org/en/topics/opening-extractives/) implemented jointly between the [Extractive Industries Transparency Initiative International Secretariat](https://eiti.org/opening-extractives) and Open Ownership.
 
 The main components are:
 
