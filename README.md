@@ -2,7 +2,7 @@
 
 This repository contains notebooks and code for analysing data published to the [Beneficial Ownership Data Standard](https://standard.openownership.org/) (BODS). 
 
-Initial work here was produced as part of the [Opening Extractives programme](https://www.openownership.org/en/topics/opening-extractives/) implemented jointly between the [Extractive Industries Transparency Initiative International Secretariat](https://eiti.org/opening-extractives) and Open Ownership.
+Initial work on [qbods.py]([url](https://github.com/openownership/bodsanalysis/blob/main/qbods.py)) and the [Latvia notebook]([url](https://github.com/openownership/bodsanalysis/blob/main/latvia_demo.ipynb)) was carried out as part of the [Opening Extractives programme](https://www.openownership.org/en/topics/opening-extractives/) implemented jointly between the [Extractive Industries Transparency Initiative International Secretariat](https://eiti.org/opening-extractives) and Open Ownership.
 
 The main components are:
 
