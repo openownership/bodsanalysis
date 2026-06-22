@@ -820,6 +820,31 @@ def q224(personStatement, minimumAge, maximumAge):
     return ([out, fig])
 
 
+def q225(ownershipOrControlStatement, thresholds=[50, 100]):
+    """
+    Description: Counts the number of unique individuals named as the interested party in ownership or control statements who are linked to more than a given number of distinct entities, for each of a list of thresholds. Answers the question of whether a small number of individuals are recorded as beneficial owners of an unusually large number of companies.
+
+    Arguments:
+        ownershipOrControlStatement: a pandas dataframe containing ownership or control statements
+        thresholds: a list of integer thresholds (number of distinct entities); for each, the number of individuals exceeding that threshold is counted
+
+    Returns: a list containing i) a pandas dataframe with one row per individual and the number of distinct entities they are linked to, and ii) a pandas dataframe summarising the number of individuals exceeding each threshold
+    """
+    personLinks = ownershipOrControlStatement.dropna(
+        subset=['interestedParty_describedByPersonStatement'])
+
+    counts = personLinks.groupby('interestedParty_describedByPersonStatement')[
+        'subject_describedByEntityStatement'].nunique()
+    counts = counts.rename('numberOfEntities').to_frame()
+
+    summary = pd.DataFrame(
+        {'Number of individuals exceeding threshold': [
+            int((counts['numberOfEntities'] > t).sum()) for t in thresholds]},
+        index=[f'More than {t} entities' for t in thresholds])
+
+    return ([counts, summary])
+
+
 def q311(personStatement, personNationalities, personIdentifiers, personNames, declaringCountry):
     """
     Description: Provides a breakdown of presence/absence of birthdates, identifiers, names, for domestic and foreign nationals
