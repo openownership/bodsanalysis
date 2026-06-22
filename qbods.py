@@ -820,6 +820,38 @@ def q224(personStatement, minimumAge, maximumAge):
     return ([out, fig])
 
 
+def q226(ownershipOrControlStatement):
+    """
+    Description: Identifies circular ownership structures, where two or more entities directly or indirectly own each other (e.g. A owns B, B owns A). Circular ownership is banned under UK law due to the risks it poses for obscuring beneficial ownership.
+
+    Arguments:
+        ownershipOrControlStatement: a pandas dataframe containing ownership or control statements
+
+    Returns: a list containing i) a pandas dataframe with one row per circular ownership chain found, listing the entities involved and the chain length, and ii) a summary dict with the number of cycles found and the number of distinct entities involved in at least one cycle
+    """
+    entityLinks = ownershipOrControlStatement.dropna(
+        subset=['interestedParty_describedByEntityStatement', 'subject_describedByEntityStatement'])
+
+    G = nx.DiGraph()
+    G.add_edges_from(zip(
+        entityLinks['interestedParty_describedByEntityStatement'],
+        entityLinks['subject_describedByEntityStatement']))
+
+    cycles = list(nx.simple_cycles(G))
+
+    out = pd.DataFrame(
+        [{'entitiesInCycle': len(cycle), 'entities': cycle} for cycle in cycles])
+
+    entitiesInAnyCycle = set(
+        entity for cycle in cycles for entity in cycle)
+    summary = {
+        'Number of circular ownership chains found': len(cycles),
+        'Number of distinct entities involved in a cycle': len(entitiesInAnyCycle),
+    }
+
+    return ([out, summary])
+
+
 def q311(personStatement, personNationalities, personIdentifiers, personNames, declaringCountry):
     """
     Description: Provides a breakdown of presence/absence of birthdates, identifiers, names, for domestic and foreign nationals
